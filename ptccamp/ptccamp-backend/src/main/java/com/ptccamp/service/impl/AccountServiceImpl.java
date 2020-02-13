@@ -47,7 +47,7 @@ public class AccountServiceImpl implements UserDetailsService, AccountService {
 		List<GrantedAuthority> authorities = new ArrayList<>();
 
 		account.getRoles().forEach(role -> {
-			authorities.add(new SimpleGrantedAuthority(role.getNombre()));
+			authorities.add(new SimpleGrantedAuthority(role.getName()));
 		});
 
 		UserDetails userDetails = new User(account.getUsername(), account.getPassword(), authorities);
