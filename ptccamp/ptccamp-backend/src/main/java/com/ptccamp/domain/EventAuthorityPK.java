@@ -18,7 +18,7 @@ public class EventAuthorityPK implements Serializable {
 	private Event event;
 
 	@ManyToOne
-	@JoinColumn(name = "authority_id", nullable = false, foreignKey = @ForeignKey(name = "authority_event"))
+	@JoinColumn(name = "authority_id", nullable = false, foreignKey = @ForeignKey(name = "authority_event_id"))
 	private Authority authority;
 
 	@Override

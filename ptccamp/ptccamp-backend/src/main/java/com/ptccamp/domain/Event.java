@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -36,18 +37,22 @@ public class Event {
 	@Column(name = "comments", nullable = false, length = 255)
 	private String comments;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "campus_id", nullable = false, foreignKey = @ForeignKey(name = "fk_event_campus"))
 	private Campus campus;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "career_id", nullable = false, foreignKey = @ForeignKey(name = "fk_event_career"))
 	private Career career;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "type_event_id", nullable = false, foreignKey = @ForeignKey(name = "fk_event_type_event"))
 	private TypeEvent typeEvent;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "full_time_teacher_id", nullable = false, foreignKey = @ForeignKey(name = "fk_event_full_time_teacher"))
 	private FullTimeTeacher fullTimeTeacher;

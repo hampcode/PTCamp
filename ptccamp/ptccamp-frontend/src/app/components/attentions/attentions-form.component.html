@@ -27,7 +27,7 @@
 
                 <select [compareWith]="compareFullTimeTeacher" class="form-control"
                     [(ngModel)]="attention.fullTimeTeacher" name="fullTimeTeacher">
-                    <option [ngValue]="undefined">--- selecionar un PTC ---</option>
+                    <option [ngValue]="undefined">--- Selecionar un PTC ---</option>
                     <option *ngFor="let fullTimeTeacher of fullTimeTeachers" [ngValue]="fullTimeTeacher">
                         {{fullTimeTeacher.firstName}},{{fullTimeTeacher.lastName}}</option>
                 </select>
@@ -37,7 +37,7 @@
 
 
             <div class="form-group">
-                <label for="nombre">Motivo de Atención</label>
+                <label for="nombre">Motivo</label>
                 <textarea name="typeAttention" [(ngModel)]="attention.typeAttention" class="form-control"></textarea>
                 <div class="alert alert-danger" *ngIf="error?.typeAttention">
                     {{ error.typeAttention }}

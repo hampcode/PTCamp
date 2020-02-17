@@ -1,7 +1,7 @@
 <div class="card bg-light mb-3">
     <div class=" card-header">{{title}}</div>
     <div class="card-body">
-
+        <button class="btn btn-primary my-2" routerLink="/students/form">Nuevo Alumno</button>
         <div class="alert alert-info" *ngIf="students?.length==0">
             No hay atenciones en el sistema.
         </div>
