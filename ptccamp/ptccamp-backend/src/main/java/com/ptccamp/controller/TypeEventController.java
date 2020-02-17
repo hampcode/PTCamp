@@ -1,6 +1,7 @@
 package com.ptccamp.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -42,11 +43,11 @@ public class TypeEventController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<TypeEvent> getById(@PathVariable("id") Long id) {
 
-		TypeEvent typeEvents = typeService.getById(id);
-		if (typeEvents.getId() == null) {
+		Optional<TypeEvent> typeEvents = typeService.getById(id);
+		if (typeEvents.isPresent()) {
 			throw new ModelNotFoundException("ID NO ENCONTRADO : " + id);
 		}
 
-		return new ResponseEntity<TypeEvent>(typeEvents, HttpStatus.OK);
+		return new ResponseEntity<TypeEvent>(typeEvents.get(), HttpStatus.OK);
 	}
 }

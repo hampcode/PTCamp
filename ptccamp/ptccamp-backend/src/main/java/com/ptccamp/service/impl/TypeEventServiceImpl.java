@@ -34,9 +34,10 @@ public class TypeEventServiceImpl implements TypeEventService {
 	}
 
 	@Override
-	public TypeEvent getById(Long id) {
-		Optional<TypeEvent> op = typeEventRepository.findById(id);
-		return op.isPresent() ? op.get() : new TypeEvent();
+	public Optional<TypeEvent> getById(Long id) {
+		//Optional<TypeEvent> op = typeEventRepository.findById(id);
+		//return op.isPresent() ? op.get() : new TypeEvent();
+		return typeEventRepository.findById(id);
 	}
 
 	@Override

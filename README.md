@@ -1,9 +1,11 @@
-## PTCamp 🚀
+## DAC 🚀
 
-Proyecto para gestión de procesos de dirección académica.
+Proyecto para gestión de procesos de la Dirección Académica de Campus - UPC San Miguel
 
+* Atención Alumno
 * Presencia Académica.
-* Disciplinario.
+* Retiro de Ciclo
+
 
 ## Construido con 🛠️
 
@@ -29,4 +31,6 @@ Por el momento yo soy el unico autor :D
 * **Henry Antonio Mendoza Puerta** -  [hamp](https://www.linkedin.com/in/henrymendozapuerta)
 
 ![Documentación](img/swagger.png)
+![Documentación](img/registerAttentionStudent.png)
+![Documentación](img/registerAttentionStudentOk.png)
 

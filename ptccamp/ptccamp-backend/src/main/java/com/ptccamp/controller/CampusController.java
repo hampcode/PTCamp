@@ -2,6 +2,7 @@ package com.ptccamp.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,12 +48,12 @@ public class CampusController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Campus> getById(@PathVariable("id") Long id) {
 
-		Campus campus = campusService.getById(id);
-		if (campus.getId() == null) {
+		Optional<Campus> campus = campusService.getById(id);
+		if (campus.isPresent()) {
 			throw new ModelNotFoundException("ID NO ENCONTRADO : " + id);
 		}
 
-		return new ResponseEntity<Campus>(campus, HttpStatus.OK);
+		return new ResponseEntity<Campus>(campus.get(), HttpStatus.OK);
 	}
 	
 	@PostMapping
@@ -72,9 +73,9 @@ public class CampusController {
 	
 	@DeleteMapping(value = "/{id}")
 	public void deleteById(@PathVariable("id") Long id){
-		Campus campus = campusService.getById(id);
+		Optional<Campus> campus = campusService.getById(id);
 
-		if (campus.getId() == null) {
+		if (campus.isPresent()) {
 			throw new ModelNotFoundException("ID NO ENCONTRADO: " + id);
 		} else {
 			campusService.delete(id);

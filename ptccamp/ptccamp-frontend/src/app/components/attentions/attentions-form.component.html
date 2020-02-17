@@ -1,0 +1,60 @@
+<div class="card bg-light">
+    <div class="card-header">{{title}}</div>
+    <div class="card-body">
+
+        <form #attentionForm="ngForm">
+
+            <div class="form-group" *ngIf="attention.student">
+                <label for="studyModel">Modalidad de Estudios</label>
+
+                <input type="text" name="studyModel" value="{{attention.student.studyMode.name}}" class="form-control"
+                    disabled>
+
+            </div>
+
+            <div class="form-group" *ngIf="attention.student">
+                <label for="student">Alumno</label>
+
+                <input type="text" name="student"
+                    value="{{attention.student.code}}-{{attention.student.firstName}}, {{attention.student.lastName}}"
+                    class="form-control" disabled>
+
+            </div>
+
+
+            <div class="form-group">
+                <label for="fullTimeTeacher">Profesor a Tiempo Completo</label>
+
+                <select [compareWith]="compareFullTimeTeacher" class="form-control"
+                    [(ngModel)]="attention.fullTimeTeacher" name="fullTimeTeacher">
+                    <option [ngValue]="undefined">--- selecionar un PTC ---</option>
+                    <option *ngFor="let fullTimeTeacher of fullTimeTeachers" [ngValue]="fullTimeTeacher">
+                        {{fullTimeTeacher.firstName}},{{fullTimeTeacher.lastName}}</option>
+                </select>
+
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="nombre">Motivo de Atención</label>
+                <textarea name="typeAttention" [(ngModel)]="attention.typeAttention" class="form-control"></textarea>
+                <div class="alert alert-danger" *ngIf="error?.typeAttention">
+                    {{ error.typeAttention }}
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <button class="btn btn-secondary my-2" routerLink="/attentions">Volver</button>
+                <button type="button" class="btn btn-primary" (click)="newAttention()">
+                    Registrar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

@@ -36,9 +36,10 @@ public class CampusServiceImpl implements CampusService {
 	}
 
 	@Override
-	public Campus getById(Long id) {
-		Optional<Campus> op = campusRepository.findById(id);
-		return op.isPresent() ? op.get() : new Campus();
+	public Optional<Campus> getById(Long id) {
+		//Optional<Campus> op = campusRepository.findById(id);
+		//return op.isPresent() ? op.get() : new Campus();
+		return campusRepository.findById(id);
 	}
 
 	@Override

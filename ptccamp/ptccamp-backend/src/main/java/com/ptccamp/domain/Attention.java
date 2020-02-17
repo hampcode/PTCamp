@@ -10,7 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -26,6 +28,7 @@ public class Attention {
 	@JsonSerialize(using = ToStringSerializer.class)
 	private LocalDateTime dateAttention;
 
+	@NotEmpty
 	@Column(name = "type_attention", nullable = false, length = 255)
 	private String typeAttention;
 
@@ -36,6 +39,11 @@ public class Attention {
 	@ManyToOne
 	@JoinColumn(name = "fulltimeteacher_id", nullable = false, foreignKey = @ForeignKey(name = "fk_attention_fulltimeteacher"))
 	private FullTimeTeacher fullTimeTeacher;
+	
+	@PrePersist
+	public void prePersist() {
+		this.dateAttention =  LocalDateTime.now();
+	}
 
 	public Long getId() {
 		return id;

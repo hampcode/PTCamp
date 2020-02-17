@@ -40,9 +40,10 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public Event getById(Long id) {
-		Optional<Event> op = eventRepository.findById(id);
-		return op.isPresent() ? op.get() : new Event();
+	public Optional<Event> getById(Long id) {
+		//Optional<Event> op = eventRepository.findById(id);
+		//return op.isPresent() ? op.get() : new Event();
+		return eventRepository.findById(id);
 	}
 
 	@Override

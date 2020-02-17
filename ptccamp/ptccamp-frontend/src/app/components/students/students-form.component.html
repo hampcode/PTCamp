@@ -1,0 +1,71 @@
+<div class="card bg-light mb-3">
+    <div class="card-header">{{title}}</div>
+    <div class="card-body">
+
+
+        <form>
+            <div class="form-group">
+                <label for="nombre">Codigo</label>
+                <input type="text" name="code" class="form-control" id="code" [(ngModel)]="student.code">
+                <div class="alert alert-danger" *ngIf="error?.code">
+                    {{ error.code }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="firstName" class="form-control" id="firstName" [(ngModel)]="student.firstName">
+                <div class="alert alert-danger" *ngIf="error?.firstName">
+                    {{ error.firstName }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="nombre">Apellido</label>
+                <input type="text" name="lastName" class="form-control" id="lastName" [(ngModel)]="student.lastName">
+                <div class="alert alert-danger" *ngIf="error?.lastName">
+                    {{ error.lastName }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="career">Carrera</label>
+
+                <select [compareWith]="compareCareer" class="form-control" [(ngModel)]="student.career" name="career">
+                    <option [ngValue]="undefined">--- selecionar una carrera ---</option>
+                    <option *ngFor="let career of careers" [ngValue]="career">{{career.name}}</option>
+                </select>
+
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="career">Modalidad de Estudios</label>
+
+                <select [compareWith]="compareStudyModel" class="form-control" [(ngModel)]="student.studyMode"
+                    name="studyMode">
+                    <option [ngValue]="undefined">--- selecionar una modalidad de estudio ---</option>
+                    <option *ngFor="let studyMode of studiesModality" [ngValue]="studyMode">{{studyMode.name}}</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="error?.career">
+                    {{ error.studyMode}}
+                </div>
+
+            </div>
+
+
+
+
+
+
+            <div class="form-group">
+                <button class="btn btn-secondary my-2" routerLink="/students">volver</button>
+
+                <button type="button" class="btn btn-primary" (click)="student.id? updateStudent(): newStudent()">
+                    {{ student.id? 'Editar': 'Registrar' }}
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

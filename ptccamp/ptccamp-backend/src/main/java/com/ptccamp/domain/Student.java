@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "students")
@@ -18,18 +19,25 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotEmpty
 	@Column(name = "code", nullable = false, length = 10)
 	private String code;
 
+	@NotEmpty
 	@Column(name = "first_name", nullable = false, length = 255)
 	private String firstName;
 
+	@NotEmpty
 	@Column(name = "last_name", nullable = false, length = 255)
 	private String lastName;
 
 	@ManyToOne
 	@JoinColumn(name = "career_id", nullable = false, foreignKey = @ForeignKey(name = "fk_student_career"))
 	private Career career;
+	
+	@ManyToOne
+	@JoinColumn(name = "study_mode_id", nullable = false, foreignKey = @ForeignKey(name = "fk_student_study_mode"))
+	private StudyMode studyMode;
 
 	public Long getId() {
 		return id;
@@ -70,5 +78,15 @@ public class Student {
 	public void setCareer(Career career) {
 		this.career = career;
 	}
+
+	public StudyMode getStudyMode() {
+		return studyMode;
+	}
+
+	public void setStudyMode(StudyMode studyMode) {
+		this.studyMode = studyMode;
+	}
+	
+	
 
 }

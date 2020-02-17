@@ -34,9 +34,10 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public Menu getById(Long id) {
-		Optional<Menu> op = menuRepository.findById(id);
-		return op.isPresent() ? op.get() : new Menu();
+	public Optional<Menu> getById(Long id) {
+		//Optional<Menu> op = menuRepository.findById(id);
+		//return op.isPresent() ? op.get() : new Menu();
+		return menuRepository.findById(id);
 	}
 
 	@Override

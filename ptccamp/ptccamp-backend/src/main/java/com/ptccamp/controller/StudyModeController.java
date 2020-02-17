@@ -20,67 +20,65 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.ptccamp.domain.Career;
-import com.ptccamp.domain.Faculty;
+import com.ptccamp.domain.StudyMode;
 import com.ptccamp.exception.ModelNotFoundException;
-
-import com.ptccamp.service.FacultyService;
+import com.ptccamp.service.StudyModeService;
 
 @RestController
-@RequestMapping("/faculties")
-public class FacultyController {
+@RequestMapping("/studiesmodality")
+public class StudyModeController {
 	
 	@Autowired
-	private FacultyService facultyService;
+	private StudyModeService studyModeService;
 	
 	@GetMapping
-	public ResponseEntity<List<Faculty>> getAll() {
-		List<Faculty> faculties = facultyService.getAll();
+	public ResponseEntity<List<StudyMode>> getAll() {
+		List<StudyMode> studiesModality = studyModeService.getAll();
 
-		return new ResponseEntity<List<Faculty>>(faculties, HttpStatus.OK);
+		return new ResponseEntity<List<StudyMode>>(studiesModality, HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/pageable", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Page<Faculty>> getAllPageable(Pageable pageable){
-		Page<Faculty> faculties;
-		faculties = facultyService.getlAllFaculties(pageable);
-		return new ResponseEntity<Page<Faculty>>(faculties, HttpStatus.OK);
+	public ResponseEntity<Page<StudyMode>> getAllPageable(Pageable pageable){
+		Page<StudyMode> studiesModality;
+		studiesModality = studyModeService.getlAllStudyMode(pageable);
+		return new ResponseEntity<Page<StudyMode>>(studiesModality, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Faculty> getById(@PathVariable("id") Long id) {
+	public ResponseEntity<StudyMode> getById(@PathVariable("id") Long id) {
 
-		Optional<Faculty> faculty = facultyService.getById(id);
-		if (faculty.isPresent()) {
+		Optional<StudyMode> studyMode = studyModeService.getById(id);
+		if (studyMode.isPresent()) {
 			throw new ModelNotFoundException("ID NO ENCONTRADO : " + id);
 		}
 
-		return new ResponseEntity<Faculty>(faculty.get(), HttpStatus.OK);
+		return new ResponseEntity<StudyMode>(studyMode.get(), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Career> register(@RequestBody Faculty faculty) {
-		Faculty facultyNew = facultyService.insert(faculty);
+	public ResponseEntity<StudyMode> register(@RequestBody StudyMode studyMode) {
+		StudyMode studyModeNew = studyModeService.insert(studyMode);
 			
 		
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(facultyNew.getId()).toUri();
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(studyModeNew.getId()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
 	@PutMapping
-	public ResponseEntity<Object> update(@RequestBody Faculty faculty) {
-		facultyService.update(faculty);
+	public ResponseEntity<Object> update(@RequestBody StudyMode studyMode) {
+		studyModeService.update(studyMode);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value = "/{id}")
 	public void deleteById(@PathVariable("id") Long id){
-		Optional<Faculty> faculty = facultyService.getById(id);
+		Optional<StudyMode> studyMode = studyModeService.getById(id);
 
-		if (faculty.isPresent()) {
+		if (studyMode.isPresent()) {
 			throw new ModelNotFoundException("ID NO ENCONTRADO: " + id);
 		} else {
-			facultyService.delete(id);
+			studyModeService.delete(id);
 		}
 	}
 	

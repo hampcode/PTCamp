@@ -35,9 +35,10 @@ public class AttentionServiceImpl implements AttentionService {
 	}
 
 	@Override
-	public Attention getById(Long id) {
-		Optional<Attention> op = attentionRepository.findById(id);
-		return op.isPresent() ? op.get() : new Attention();
+	public Optional<Attention> getById(Long id) {
+		//Optional<Attention> op = attentionRepository.findById(id);
+		//return op.isPresent() ? op.get() : new Attention();
+		return attentionRepository.findById(id);
 	}
 
 	@Override

@@ -35,9 +35,10 @@ public class FullTimeTeacherServiceImpl implements FullTimeTeacherService{
 	}
 
 	@Override
-	public FullTimeTeacher getById(Long id) {
-		Optional<FullTimeTeacher> op = fullTimeTeacherRepository.findById(id);
-		return op.isPresent() ? op.get() : new FullTimeTeacher();
+	public Optional<FullTimeTeacher> getById(Long id) {
+		//Optional<FullTimeTeacher> op = fullTimeTeacherRepository.findById(id);
+		//return op.isPresent() ? op.get() : new FullTimeTeacher();
+		return fullTimeTeacherRepository.findById(id);
 	}
 
 	@Override

@@ -34,9 +34,10 @@ public class CareerServiceImpl implements CareerService {
 	}
 
 	@Override
-	public Career getById(Long id) {
-		Optional<Career> op = careerRepository.findById(id);
-		return op.isPresent() ? op.get() : new Career();
+	public Optional<Career> getById(Long id) {
+		//Optional<Career> op = careerRepository.findById(id);
+		//return op.isPresent() ? op.get() : new Career();
+		return careerRepository.findById(id);
 	}
 
 	@Override

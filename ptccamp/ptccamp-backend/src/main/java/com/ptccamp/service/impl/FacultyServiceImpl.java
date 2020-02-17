@@ -34,9 +34,10 @@ public class FacultyServiceImpl implements FacultyService {
 	}
 
 	@Override
-	public Faculty getById(Long id) {
-		Optional<Faculty> op = facultyRepository.findById(id);
-		return op.isPresent() ? op.get() : new Faculty();
+	public Optional<Faculty> getById(Long id) {
+		//Optional<Faculty> op = facultyRepository.findById(id);
+		//return op.isPresent() ? op.get() : new Faculty();
+		return facultyRepository.findById(id);
 	}
 
 	@Override

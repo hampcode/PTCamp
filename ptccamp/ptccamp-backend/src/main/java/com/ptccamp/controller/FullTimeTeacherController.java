@@ -2,6 +2,7 @@ package com.ptccamp.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,10 +33,11 @@ public class FullTimeTeacherController {
 	private FullTimeTeacherService fullTimeTeacherService;
 	
 	@GetMapping
-	public ResponseEntity<List<FullTimeTeacher>> getAll() {
-		List<FullTimeTeacher> fullTimeTeachers = fullTimeTeacherService.getAll();
+	public ResponseEntity<List<?>> getAll() {
+		//List<FullTimeTeacher> fullTimeTeachers = fullTimeTeacherService.getAll();
 
-		return new ResponseEntity<List<FullTimeTeacher>>(fullTimeTeachers, HttpStatus.OK);
+		//return new ResponseEntity<List<FullTimeTeacher>>(fullTimeTeachers, HttpStatus.OK);
+		return ResponseEntity.ok().body(fullTimeTeacherService.getAll());
 	}
 	
 	@GetMapping(value="/pageable", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -48,12 +50,12 @@ public class FullTimeTeacherController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<FullTimeTeacher> getById(@PathVariable("id") Long id) {
 
-		FullTimeTeacher fullTimeTeacher = fullTimeTeacherService.getById(id);
-		if (fullTimeTeacher.getId() == null) {
+		Optional<FullTimeTeacher> fullTimeTeacher = fullTimeTeacherService.getById(id);
+		if (!fullTimeTeacher.isPresent()) {
 			throw new ModelNotFoundException("ID NO ENCONTRADO : " + id);
 		}
 
-		return new ResponseEntity<FullTimeTeacher>(fullTimeTeacher, HttpStatus.OK);
+		return new ResponseEntity<FullTimeTeacher>(fullTimeTeacher.get(), HttpStatus.OK);
 	}
 	
 	@PostMapping
@@ -73,9 +75,9 @@ public class FullTimeTeacherController {
 	
 	@DeleteMapping(value = "/{id}")
 	public void deleteById(@PathVariable("id") Long id){
-		FullTimeTeacher fullTimeTeacher = fullTimeTeacherService.getById(id);
+		Optional<FullTimeTeacher> fullTimeTeacher = fullTimeTeacherService.getById(id);
 
-		if (fullTimeTeacher.getId() == null) {
+		if (fullTimeTeacher.isPresent()) {
 			throw new ModelNotFoundException("ID NO ENCONTRADO: " + id);
 		} else {
 			fullTimeTeacherService.delete(id);

@@ -1,1 +1,41 @@
-<p>attentions works!</p>
+<div class="card bg-light mb-3">
+    <div class=" card-header">{{title}}</div>
+    <div class="card-body">
+
+        <div class="alert alert-info" *ngIf="students?.length==0">
+            No hay atenciones en el sistema.
+        </div>
+        <table class="table table-responsive-xl table-striped" *ngIf="students?.length>0">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Facultad</th>
+                    <th>Carrera</th>
+                    <th>Modalidad</th>
+                    <th>Generar</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of students">
+                    <td>{{student.code}}</td>
+                    <td>{{student.firstName}}</td>
+                    <td>{{student.lastName}}</td>
+                    <td>{{student.career.faculty.name}}</td>
+                    <td>{{student.career.name}}</td>
+                    <td>{{student.studyMode.name}}</td>
+                    <td><button type="button" class="btn btn-success btn-sm"
+                            [routerLink]="['/attentions/form', student.id]">Atención Alumno</button>
+                    </td>
+
+
+                </tr>
+            </tbody>
+        </table>
+        <mat-paginator [length]="totalRecords" [pageSize]="totalPage" [pageIndex]="pageCurrent"
+            [pageSizeOptions]="pageSizeOptions" (page)="paging($event)" showFirstLastButtons class="float-left mx-2">
+        </mat-paginator>
+    </div>
+</div>

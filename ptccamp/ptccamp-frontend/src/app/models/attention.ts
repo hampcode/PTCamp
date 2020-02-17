@@ -1,8 +1,9 @@
-import { Fulltimeteacher } from './fulltimeteacher';
+import { FullTimeTeacher } from './full-time-teacher';
+
 import { Student } from './student';
 export class Attention {
-    id:number;
-    typeAttention:string;
-    student:Student;
-    fulltimeteacher:Fulltimeteacher;
+    id: number;
+    typeAttention: string;
+    student: Student;
+    fullTimeTeacher: FullTimeTeacher;
 }

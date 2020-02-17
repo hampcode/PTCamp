@@ -1,6 +1,7 @@
 package com.ptccamp.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -46,12 +47,12 @@ public class EventController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Event> getById(@PathVariable("id") Long id) {
 
-		Event event = eventService.getById(id);
-		if (event.getId() == null) {
+		Optional<Event> event = eventService.getById(id);
+		if (event.isPresent()) {
 			throw new ModelNotFoundException("ID NO ENCONTRADO : " + id);
 		}
 
-		return new ResponseEntity<Event>(event, HttpStatus.OK);
+		return new ResponseEntity<Event>(event.get(), HttpStatus.OK);
 	}
 
 	@PostMapping
@@ -70,9 +71,9 @@ public class EventController {
 
 	@DeleteMapping(value = "/{id}")
 	public void deleteById(@PathVariable("id") Long id) {
-		Event event = eventService.getById(id);
+		Optional<Event> event = eventService.getById(id);
 
-		if (event.getId() == null) {
+		if (event.isPresent()) {
 			throw new ModelNotFoundException("ID NO ENCONTRADO: " + id);
 		} else {
 			eventService.delete(id);
