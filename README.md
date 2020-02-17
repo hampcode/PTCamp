@@ -2,9 +2,9 @@
 
 Proyecto para gestión de procesos de la Dirección Académica de Campus - UPC San Miguel
 
-* Atención Alumno
+* Atención Alumno.
 * Presencia Académica.
-* Retiro de Ciclo
+* Retiro de Ciclo.
 
 
 ## Construido con 🛠️
