@@ -13,6 +13,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { StudentsFormComponent } from './components/students/students-form.component';
 import { AttentionsFormComponent } from './components/attentions/attentions-form.component';
+import { EventsComponent } from './events/events.component';
+import { EventsFormComponent } from './components/events/events-form.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { AttentionsFormComponent } from './components/attentions/attentions-form
     StudentsComponent,
     AttentionsComponent,
     StudentsFormComponent,
-    AttentionsFormComponent
+    AttentionsFormComponent,
+    EventsComponent,
+    EventsFormComponent
   ],
   imports: [
     BrowserModule,

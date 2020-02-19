@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -25,15 +26,19 @@ public class Event {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotEmpty
 	@JsonSerialize(using = ToStringSerializer.class)
 	private LocalDateTime dateEvent;
 
+	@NotEmpty
 	@Column(name = "number_quests", length = 2)
 	private int numberOfQuests;
 
+	@NotEmpty
 	@Column(name = "number_attendees", length = 2)
 	private int numberOfAttendees;
 
+	@NotEmpty
 	@Column(name = "comments", nullable = false, length = 255)
 	private String comments;
 

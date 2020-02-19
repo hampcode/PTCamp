@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.ptccamp.domain.Event;
-import com.ptccamp.dto.EventDTO;
+import com.ptccamp.dto.EventAuthoritiesDTO;
 import com.ptccamp.repository.EventAuthorityRepository;
 import com.ptccamp.repository.EventRepository;
 import com.ptccamp.service.EventService;
@@ -52,7 +52,7 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public Long registerTransactional(EventDTO eventDTO) {
+	public Long registerTransactional(EventAuthoritiesDTO eventDTO) {
 		
 		eventRepository.save(eventDTO.getEvent());
 		

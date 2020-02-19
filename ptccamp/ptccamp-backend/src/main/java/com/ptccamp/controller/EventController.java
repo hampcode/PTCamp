@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ptccamp.domain.Event;
-import com.ptccamp.dto.EventDTO;
+import com.ptccamp.domain.Student;
+import com.ptccamp.dto.EventAuthoritiesDTO;
 import com.ptccamp.exception.ModelNotFoundException;
 import com.ptccamp.service.EventService;
 
@@ -31,32 +32,28 @@ public class EventController {
 	private EventService eventService;
 
 	@GetMapping
-	public ResponseEntity<List<Event>> getAll() {
-		List<Event> events = eventService.getAll();
-
-		return new ResponseEntity<List<Event>>(events, HttpStatus.OK);
+	public ResponseEntity<?> getAll() {
+		return ResponseEntity.ok().body(eventService.getAll());
 	}
 	
-	@GetMapping(value="/pageable", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping("/pageable")
 	public ResponseEntity<Page<Event>> getAllPageable(Pageable pageable){
-		Page<Event> events;
-		events = eventService.getlAllEvent(pageable);
-		return new ResponseEntity<Page<Event>>(events, HttpStatus.OK);
+		return ResponseEntity.ok().body(eventService.getlAllEvent(pageable));
 	}
 
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<Event> getById(@PathVariable("id") Long id) {
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getById(@PathVariable("id") Long id) {
 
 		Optional<Event> event = eventService.getById(id);
-		if (event.isPresent()) {
-			throw new ModelNotFoundException("ID NO ENCONTRADO : " + id);
+		if (!event.isPresent()) {
+			return ResponseEntity.notFound().build();
 		}
 
-		return new ResponseEntity<Event>(event.get(), HttpStatus.OK);
+		return ResponseEntity.ok(event.get());
 	}
 
 	@PostMapping
-	public ResponseEntity<Long> register(@RequestBody EventDTO eventDTO) {
+	public ResponseEntity<Long> register(@RequestBody EventAuthoritiesDTO eventDTO) {
 
 		Long rpta = eventService.registerTransactional(eventDTO);
 
@@ -69,14 +66,15 @@ public class EventController {
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/{id}")
-	public void deleteById(@PathVariable("id") Long id) {
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?>  deleteById(@PathVariable Long id) {
 		Optional<Event> event = eventService.getById(id);
 
-		if (event.isPresent()) {
-			throw new ModelNotFoundException("ID NO ENCONTRADO: " + id);
+		if (!event.isPresent()) {
+			return ResponseEntity.notFound().build();
 		} else {
 			eventService.delete(id);
+			return ResponseEntity.noContent().build();
 		}
 	}
 

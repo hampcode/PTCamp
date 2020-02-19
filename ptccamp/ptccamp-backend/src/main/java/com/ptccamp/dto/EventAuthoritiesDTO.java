@@ -5,7 +5,7 @@ import java.util.List;
 import com.ptccamp.domain.Authority;
 import com.ptccamp.domain.Event;
 
-public class EventDTO {
+public class EventAuthoritiesDTO {
 
 	private Event event;
 	private List<Authority> authorities;
